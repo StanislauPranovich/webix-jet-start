@@ -4,7 +4,7 @@ import { statuses } from "../../models/statuses";
 
 export default class DataTableView extends JetView {
 	constructor(app, data) {
-		super(app);
+		super(app, {});
 		this.tableData = data;
 	}
 	config() {

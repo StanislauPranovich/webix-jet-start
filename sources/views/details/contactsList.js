@@ -15,7 +15,7 @@ export default class ContactsListView extends JetView {
 		list_of_contacts.parse(contacts);
 	}
 
-    $getListOfContacts() {
-        return this.$$("list_of_contacts");
-    }
+	$getListOfContacts() {
+		return this.$$("list_of_contacts");
+	}
 }

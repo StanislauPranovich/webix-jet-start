@@ -1,10 +1,9 @@
 import { JetView } from "webix-jet";
-import { statuses } from "../../models/statuses";
 
 
 export default class DataTableView extends JetView {
 	constructor(app, data) {
-		super(app, {});
+		super(app);
 		this.tableData = data;
 	}
 	config() {
@@ -12,7 +11,7 @@ export default class DataTableView extends JetView {
 			rows: [
 				{
 					view: "datatable",
-					localId: "tableWithData",
+					localId: "tableView",
 					autoConfig: true,
 					editable: "text",
 					editaction: "dblclick",
@@ -22,7 +21,7 @@ export default class DataTableView extends JetView {
 					cols: [
 						{
 							view: "text",
-							localId: "input_value",
+							localId: "textView",
 							name: "Name"
 						},
 						{
@@ -44,12 +43,12 @@ export default class DataTableView extends JetView {
 		};
 	}
 
-	$getInputValue() {
-		return this.$$("input_value");
+	$getTextView() {
+		return this.$$("textView");
 	}
 
 	$getDataTable() {
-		return this.$$("tableWithData");
+		return this.$$("tableView");
 	}
 
 	init() {
@@ -57,22 +56,20 @@ export default class DataTableView extends JetView {
 	}
 
 	addItem() {
-		const inputValue = this.$getInputValue();
+		const input = this.$getTextView();
 		const table = this.$getDataTable();
-		const receivedValue = inputValue.getValue();
-		const arrayOfTitles = this.getRoot().$view.innerText.split("\n")
-		if (arrayOfTitles.indexOf("Icon") !== -1 && receivedValue) {
-			table.add({ "Name": receivedValue, "Icon": "user" });
-		} else if (receivedValue) {
+		const receivedValue = input.getValue();
+		if (receivedValue) {
 			table.add({ "Name": receivedValue });
 		}
-		inputValue.setValue("");
+		input.setValue("");
 	}
 
 	removeItem() {
 		const table = this.$getDataTable();
-		if (table.getSelectedId()) {
-			table.remove(table.getSelectedId());
+		const receivedId = table.getSelectedId();
+		if (receivedId) {
+			table.remove(receivedId);
 		}
 	}
 }

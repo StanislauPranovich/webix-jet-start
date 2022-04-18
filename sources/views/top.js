@@ -3,11 +3,13 @@ import {JetView, plugins} from "webix-jet";
 
 export default class TopView extends JetView {
 	config() {
-		let header = {
-			type: "header", template: this.app.config.name, css: "webix_header app_header"
+		const header = {
+			type: "header",
+			template: this.app.config.name,
+			css: "webix_header app_header"
 		};
 
-		let menu = {
+		const menu = {
 			view: "menu",
 			id: "top:menu",
 			css: "app_menu",
@@ -16,23 +18,47 @@ export default class TopView extends JetView {
 			select: true,
 			template: "<span class='webix_icon #icon#'></span> #value# ",
 			data: [
-				{value: "Dashboard", id: "start", icon: "wxi-columns"},
-				{value: "Data",		 id: "data", icon: "wxi-pencil"}
+				{
+					value: "Contacts",
+					id: "contacts",
+					icon: "fas fa-address-book"
+				},
+				{
+					value: "Data",
+					id: "data",
+					icon: "wxi-pencil"
+				},
+				{
+					value: "Settings",
+					id: "settings",
+					icon: "fas fa-bars"
+				}
 			]
 		};
 
-		let ui = {
+		const ui = {
 			type: "clean",
 			paddingX: 5,
 			css: "app_layout",
 			cols: [
-				{paddingX: 5, paddingY: 10, rows: [{css: "webix_shadow_medium", rows: [header, menu]}]},
-				{type: "wide",
+				{
+					paddingX: 5,
+					paddingY: 10,
+					rows: [
+						{
+							css: "webix_shadow_medium",
+							rows: [header, menu]
+						}
+					]
+				},
+				{
+					type: "wide",
 					paddingY: 10,
 					paddingX: 5,
 					rows: [
 						{$subview: true}
-					]}
+					]
+				}
 			]
 		};
 

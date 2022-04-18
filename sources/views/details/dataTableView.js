@@ -3,8 +3,8 @@ import { statuses } from "../../models/statuses";
 
 
 export default class DataTableView extends JetView {
-	constructor(app, {}, data) {
-		super(app, {});
+	constructor(app, data) {
+		super(app);
 		this.tableData = data;
 	}
 	config() {
@@ -57,15 +57,15 @@ export default class DataTableView extends JetView {
 	}
 
 	addItem() {
-		const input_value = this.$getInputValue();
+		const inputValue = this.$getInputValue();
 		const table = this.$getDataTable();
-		const receivedValue = input_value.getValue();
-		if (this.tableData === statuses && receivedValue) {
-			table.add({ "Name": input_value.getValue(), "Icon": "user" });
+		const receivedValue = inputValue.getValue();
+		if (Object.keys(this.tableData[0]).length > 2 && receivedValue) {
+			table.add({ "Name": receivedValue, "Icon": "user" });
 		} else if (receivedValue) {
-			table.add({ "Name": input_value.getValue() });
+			table.add({ "Name": receivedValue });
 		}
-		input_value.setValue("");
+		inputValue.setValue("");
 	}
 
 	removeItem() {

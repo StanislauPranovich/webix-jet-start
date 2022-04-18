@@ -1,4 +1,4 @@
-import { JetView, plugins } from "webix-jet";
+import {JetView, plugins} from "webix-jet";
 
 
 export default class TopView extends JetView {
@@ -52,11 +52,11 @@ export default class TopView extends JetView {
 					]
 				},
 				{
-					type: "wide", 
-					paddingY: 10, 
-					paddingX: 5, 
+					type: "wide",
+					paddingY: 10,
+					paddingX: 5,
 					rows: [
-						{ $subview: true }
+						{$subview: true}
 					]
 				}
 			]
@@ -64,6 +64,7 @@ export default class TopView extends JetView {
 
 		return ui;
 	}
+
 	init() {
 		this.use(plugins.Menu, "top:menu");
 	}

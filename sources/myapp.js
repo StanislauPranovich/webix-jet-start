@@ -5,11 +5,11 @@ import "./styles/app.css";
 export default class MyApp extends JetApp {
 	constructor(config) {
 		const defaults = {
-			id 		: APPNAME,
-			version : VERSION,
-			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
-			debug 	: true,
-			start 	: "/top/contacts"
+			id: APPNAME,
+			version: VERSION,
+			router: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
+			debug: true,
+			start: "/top/contacts"
 		};
 
 		super({...defaults, ...config});

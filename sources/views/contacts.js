@@ -1,4 +1,5 @@
-import { JetView } from "webix-jet";
+import {JetView} from "webix-jet";
+
 import ContactsFormView from "./details/contactsForm";
 import ContactsListView from "./details/contactsList";
 
@@ -8,7 +9,7 @@ export default class ContactsView extends JetView {
 			cols: [
 				ContactsListView,
 				ContactsFormView
-			],
+			]
 		};
 	}
 }

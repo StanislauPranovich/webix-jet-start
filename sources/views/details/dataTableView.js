@@ -1,4 +1,4 @@
-import { JetView } from "webix-jet";
+import {JetView} from "webix-jet";
 
 
 export default class DataTableView extends JetView {
@@ -6,6 +6,7 @@ export default class DataTableView extends JetView {
 		super(app);
 		this.tableData = data;
 	}
+
 	config() {
 		return {
 			rows: [
@@ -60,7 +61,7 @@ export default class DataTableView extends JetView {
 		const table = this.$getDataTable();
 		const receivedValue = input.getValue();
 		if (receivedValue.trim()) {
-			table.add({ "Name": receivedValue });
+			table.add({Name: receivedValue});
 			input.setValue("");
 		}
 	}

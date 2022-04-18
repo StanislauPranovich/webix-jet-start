@@ -1,9 +1,9 @@
 let path = require("path");
 let webpack = require("webpack");
 
-module.exports = (env) => {
-	let pack = "./package.json";
-	let MiniCssExtractPlugin = "mini-css-extract-plugin";
+module.exports = function (env) {
+	let pack = require("./package.json");
+	let MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 	let production = !!(env && env.production);
 	let asmodule = !!(env && env.module);

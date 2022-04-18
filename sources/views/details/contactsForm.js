@@ -6,12 +6,26 @@ export default class ContactsFormView extends JetView {
 			view: "form",
 			localId: "contactsForm",
 			elements: [
-				{ view: "text", label: "Name", name: "name" },
-				{ view: "text", label: "Country", name: "country" },
+				{ 
+					view: "text", 
+					label: "Name", 
+					name: "name" 
+				},
+				{ 
+					view: "text", 
+					label: "Country", 
+					name: "country" 
+				},
 				{
 					cols: [
-						{ view: "button", value: "Save" },
-						{ view: "button", value: "Remove" }
+						{ 
+							view: "button", 
+							value: "Save" 
+						},
+						{ 
+							view: "button", 
+							value: "Remove" 
+						}
 					]
 				},
 				{}

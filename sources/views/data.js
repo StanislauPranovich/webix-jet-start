@@ -10,12 +10,23 @@ export default class DataView extends JetView {
 			view: "tabview",
 			css: "webix_shadow_medium",
 			cells: [
-				{ body: { rows: [new DataTableView(this.app, "", countries)] }, header: "Countries" },
-				{ body: { rows: [new DataTableView(this.app, "", statuses)] }, header: "Statuses" }
+				{
+					body:
+					{
+						rows:
+							[new DataTableView(this.app, "", countries)]
+					},
+					header: "Countries"
+				},
+				{
+					body:
+					{
+						rows:
+							[new DataTableView(this.app, "", statuses)]
+					},
+					header: "Statuses"
+				}
 			]
 		};
-	}
-
-	init() {
 	}
 }

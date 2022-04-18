@@ -3,8 +3,8 @@ import { statuses } from "../../models/statuses";
 
 
 export default class DataTableView extends JetView {
-	constructor(app, name, data) {
-		super(app, name);
+	constructor(app, {}, data) {
+		super(app, {});
 		this.tableData = data;
 	}
 	config() {
@@ -43,23 +43,33 @@ export default class DataTableView extends JetView {
 			]
 		};
 	}
-	init(view) {
-		view.queryView("datatable").parse(this.tableData);
+
+	$getInputValue() {
+		return this.$$("input_value");
+	}
+
+	$getDataTable() {
+		return this.$$("tableWithData");
+	}
+
+	init() {
+		this.$getDataTable().parse(this.tableData);
 	}
 
 	addItem() {
-		const input_value = this.$$("input_value");
-		const table = this.$$("tableWithData");
-		if (this.tableData === statuses && input_value.getValue()) {
+		const input_value = this.$getInputValue();
+		const table = this.$getDataTable();
+		const receivedValue = input_value.getValue();
+		if (this.tableData === statuses && receivedValue) {
 			table.add({ "Name": input_value.getValue(), "Icon": "user" });
-		} else if (input_value.getValue()) {
+		} else if (receivedValue) {
 			table.add({ "Name": input_value.getValue() });
 		}
 		input_value.setValue("");
 	}
 
 	removeItem() {
-		const table = this.$$("tableWithData");
+		const table = this.$getDataTable();
 		if (table.getSelectedId()) {
 			table.remove(table.getSelectedId());
 		}

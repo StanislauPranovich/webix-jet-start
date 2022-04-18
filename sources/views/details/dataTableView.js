@@ -59,10 +59,10 @@ export default class DataTableView extends JetView {
 		const input = this.$getTextView();
 		const table = this.$getDataTable();
 		const receivedValue = input.getValue();
-		if (receivedValue) {
+		if (receivedValue.trim()) {
 			table.add({ "Name": receivedValue });
+			input.setValue("");
 		}
-		input.setValue("");
 	}
 
 	removeItem() {

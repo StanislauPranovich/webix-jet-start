@@ -62,7 +62,7 @@ export default class DataTableView extends JetView {
 		const receivedValue = inputValue.getValue();
 		if (Object.keys(this.tableData[0]).length > 2 && receivedValue) {
 			table.add({ "Name": receivedValue, "Icon": "user" });
-		} else {
+		} else if (receivedValue) {
 			table.add({ "Name": receivedValue });
 		}
 		inputValue.setValue("");

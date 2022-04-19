@@ -7,6 +7,7 @@ import DataTableView from "./details/dataTableView";
 
 export default class DataView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			view: "tabview",
 			css: "webix_shadow_medium",
@@ -16,7 +17,7 @@ export default class DataView extends JetView {
 						new DataTableView(this.app, countries)
 					]
 				},
-				header: "Countries"
+				header: _("Countries")
 			},
 			{
 				body: {
@@ -24,7 +25,7 @@ export default class DataView extends JetView {
 						new DataTableView(this.app, statuses)
 					]
 				},
-				header: "Statuses"
+				header: _("Statuses")
 			}
 			]
 		};

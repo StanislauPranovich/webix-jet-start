@@ -52,13 +52,13 @@ export default class ContactsListView extends JetView {
 
 	init() {
 		const listOfContacts = this.$getListOfContacts();
-		const getIdFromURL = this.getParam("id");
+		const contactId = this.getParam("id");
 		listOfContacts.parse(this.getContacts());
 		this.on(listOfContacts, "onAfterSelect", (id) => {
 			this.show(`contacts?id=${id}`);
 		});
-		if (getIdFromURL) {
-			listOfContacts.select(getIdFromURL);
+		if (contactId) {
+			listOfContacts.select(contactId);
 		}
 		else {
 			listOfContacts.select(listOfContacts.getFirstId());

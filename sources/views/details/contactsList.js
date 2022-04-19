@@ -16,7 +16,7 @@ export default class ContactsListView extends JetView {
 					template: "#Name# <span class='remove-btn'>X</span>",
 					select: true,
 					onClick: {
-						"remove-btn"(e, id) {
+						"remove-btn": function (e, id) {
 							contacts.remove(id);
 							return false;
 						}

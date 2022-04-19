@@ -64,4 +64,10 @@ export default class ContactsListView extends JetView {
 			listOfContacts.select(listOfContacts.getFirstId());
 		}
 	}
+	urlChange() {
+		const contactId = this.getParam("id");
+		if(contactId === undefined) {
+			this.$getListOfContacts().unselectAll();
+		}
+	}
 }

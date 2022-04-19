@@ -82,6 +82,8 @@ export default class ContactsFormView extends JetView {
 		const urlId = this.getParam("id");
 		if (urlId) {
 			this.$getContactsForm().setValues(this.getContacts(urlId));
+		} else {
+			this.$getContactsForm().clear();
 		}
 	}
 }

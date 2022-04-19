@@ -8,5 +8,7 @@ export default {
 	Contacts: "Contacts",
 	Data: "Data",
 	Settings: "Settings",
-	App: "App"
+	App: "App",
+	Countries: "Countries",
+	Statuses: "Statuses",
 };

@@ -4,6 +4,7 @@ import contacts from "../../models/contacts";
 import countries from "../../models/countries";
 import statuses from "../../models/statuses";
 import users from "../../models/users";
+import randomInteger from "../helpers/randomInteger";
 
 export default class ContactsListView extends JetView {
 	config() {
@@ -41,27 +42,23 @@ export default class ContactsListView extends JetView {
 		return contacts;
 	}
 
-	randomInteger(min, max) {
-		let rand = min + Math.random() * (max + 1 - min);
-		return Math.floor(rand);
-	}
-
 	addItem() {
 		contacts.add({
-			Name: users.getItem(users.getIdByIndex(this.randomInteger(0, users.count() - 1))).name,
-			Country: this.randomInteger(1, countries.count()),
-			Status: this.randomInteger(1, statuses.count())
+			Name: users.getItem(users.getIdByIndex(randomInteger(0, users.count() - 1))).name,
+			Country: randomInteger(1, countries.count()),
+			Status: randomInteger(1, statuses.count())
 		});
 	}
 
 	init() {
 		const listOfContacts = this.$getListOfContacts();
+		const getIdFromURL = this.getParam("id");
 		listOfContacts.parse(this.getContacts());
 		this.on(listOfContacts, "onAfterSelect", (id) => {
 			this.show(`contacts?id=${id}`);
 		});
-		if (this.getParam("id")) {
-			listOfContacts.select(this.getParam("id"));
+		if (getIdFromURL) {
+			listOfContacts.select(getIdFromURL);
 		}
 		else {
 			listOfContacts.select(listOfContacts.getFirstId());

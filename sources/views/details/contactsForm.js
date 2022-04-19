@@ -62,22 +62,26 @@ export default class ContactsFormView extends JetView {
 		return contacts;
 	}
 
+	$getContactsForm() {
+		return this.$$("contactsForm")
+	}
+
 	saveItem() {
-		const getFormValues = this.getRoot().getValues();
-		if (this.$$("contactsForm").isDirty()) {
+		const getFormValues = this.$getContactsForm().getValues();
+		if (this.$getContactsForm().isDirty()) {
 			contacts.updateItem(getFormValues.id, getFormValues);
 			this.webix.message("Data saved!");
 		}
 	}
 
-	init(view) {
-		view.setValues(this.getContacts(this.getContacts().getFirstId()));
+	init() {
+		this.$getContactsForm().setValues(this.getContacts(this.getContacts().getFirstId()));
 	}
 
-	urlChange(view) {
+	urlChange() {
 		const urlId = this.getParam("id");
 		if (urlId) {
-			view.setValues(this.getContacts(urlId));
+			this.$getContactsForm().setValues(this.getContacts(urlId));
 		}
 	}
 }

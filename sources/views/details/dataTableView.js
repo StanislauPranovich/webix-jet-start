@@ -1,4 +1,6 @@
 import {JetView} from "webix-jet";
+import countries from "../../models/countries";
+import statuses from "../../models/statuses";
 
 
 export default class DataTableView extends JetView {
@@ -70,8 +72,10 @@ export default class DataTableView extends JetView {
 	removeItem() {
 		const table = this.$getDataTable();
 		const receivedId = table.getSelectedId();
-		if (receivedId) {
-			table.remove(receivedId);
+		if (receivedId && this.tableData.config.url.includes("countries")) {
+			countries.remove(receivedId);
+		} else if (receivedId){
+			statuses.remove(receivedId)
 		}
 	}
 }

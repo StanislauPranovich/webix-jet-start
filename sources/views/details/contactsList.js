@@ -1,8 +1,6 @@
 import {JetView} from "webix-jet";
 
 import contacts from "../../models/contacts";
-import countries from "../../models/countries";
-import statuses from "../../models/statuses";
 import users from "../../models/users";
 import randomInteger from "../helpers/randomInteger";
 
@@ -14,11 +12,17 @@ export default class ContactsListView extends JetView {
 				{
 					view: "list",
 					localId: "listOfContacts",
-					template: "#Name# <span class='remove-btn'>X</span>",
+					template: "#FirstName# <span class='remove-btn'>X</span>",
 					select: true,
 					onClick: {
-						"remove-btn": function (e, id) {
+						"remove-btn": (e, id) => {
 							contacts.remove(id);
+							if (this.$getListOfContacts().count() !== 0) {
+								this.$getListOfContacts().select(this.$getListOfContacts().getFirstId());
+							}
+							else {
+								this.show("contacts");
+							}
 							return false;
 						}
 					}
@@ -44,29 +48,30 @@ export default class ContactsListView extends JetView {
 
 	addItem() {
 		contacts.add({
-			Name: users.getItem(users.getIdByIndex(randomInteger(0, users.count() - 1))).name,
-			Country: randomInteger(1, countries.count()),
-			Status: randomInteger(1, statuses.count())
+			FirstName: users.getItem(users.getIdByIndex(randomInteger(0, users.count() - 1))).name
 		});
 	}
 
 	init() {
 		const listOfContacts = this.$getListOfContacts();
 		const contactId = this.getParam("id");
-		listOfContacts.parse(this.getContacts());
+		listOfContacts.sync(this.getContacts());
 		this.on(listOfContacts, "onAfterSelect", (id) => {
 			this.show(`contacts?id=${id}`);
 		});
-		if (contactId) {
-			listOfContacts.select(contactId);
-		}
-		else {
-			listOfContacts.select(listOfContacts.getFirstId());
-		}
+		this.getContacts().waitData.then(() => {
+			if (contactId) {
+				listOfContacts.select(contactId);
+			}
+			else {
+				listOfContacts.select(listOfContacts.getFirstId());
+			}
+		});
 	}
+
 	urlChange() {
 		const contactId = this.getParam("id");
-		if(contactId === undefined) {
+		if (contactId === undefined) {
 			this.$getListOfContacts().unselectAll();
 		}
 	}

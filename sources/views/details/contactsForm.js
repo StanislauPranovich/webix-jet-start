@@ -14,13 +14,13 @@ export default class ContactsFormView extends JetView {
 				{
 					view: "text",
 					label: _("Name"),
-					name: "Name"
+					name: "FirstName"
 				},
 				{
 					view: "combo",
 					label: _("Country"),
 					localId: "country",
-					name: "Country",
+					name: "Address",
 					options: {
 						view: "suggest",
 						body: {
@@ -33,13 +33,13 @@ export default class ContactsFormView extends JetView {
 				{
 					view: "combo",
 					label: _("Status"),
-					name: "Status",
+					name: "StatusID",
 					options: {
 						view: "suggest",
 						body: {
 							view: "list",
 							data: statuses,
-							template: "#Name#"
+							template: "#Value#"
 						}
 					}
 				},
@@ -63,7 +63,7 @@ export default class ContactsFormView extends JetView {
 	}
 
 	$getContactsForm() {
-		return this.$$("contactsForm")
+		return this.$$("contactsForm");
 	}
 
 	saveItem() {
@@ -74,16 +74,15 @@ export default class ContactsFormView extends JetView {
 		}
 	}
 
-	init() {
-		this.$getContactsForm().setValues(this.getContacts(this.getContacts().getFirstId()));
-	}
-
 	urlChange() {
 		const urlId = this.getParam("id");
-		if (urlId) {
-			this.$getContactsForm().setValues(this.getContacts(urlId));
-		} else {
-			this.$getContactsForm().clear();
-		}
+		this.getContacts().waitData.then(() => {
+			if (urlId) {
+				this.$getContactsForm().setValues(this.getContacts(urlId));
+			}
+			else {
+				this.$getContactsForm().clear();
+			}
+		});
 	}
 }

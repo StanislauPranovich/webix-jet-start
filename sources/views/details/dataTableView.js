@@ -1,6 +1,5 @@
 import {JetView} from "webix-jet";
 
-
 export default class DataTableView extends JetView {
 	constructor(app, data) {
 		super(app);
@@ -59,10 +58,9 @@ export default class DataTableView extends JetView {
 
 	addItem() {
 		const input = this.$getTextView();
-		const table = this.$getDataTable();
 		const receivedValue = input.getValue();
 		if (receivedValue.trim()) {
-			table.add({Name: receivedValue});
+			this.tableData.add({Value: receivedValue, Name: receivedValue});
 			input.setValue("");
 		}
 	}
@@ -71,7 +69,7 @@ export default class DataTableView extends JetView {
 		const table = this.$getDataTable();
 		const receivedId = table.getSelectedId();
 		if (receivedId) {
-			table.remove(receivedId);
+			this.tableData.remove(receivedId);
 		}
 	}
 }

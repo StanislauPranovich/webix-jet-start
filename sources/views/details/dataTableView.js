@@ -1,4 +1,5 @@
 import {JetView} from "webix-jet";
+
 import countries from "../../models/countries";
 import statuses from "../../models/statuses";
 
@@ -61,10 +62,13 @@ export default class DataTableView extends JetView {
 
 	addItem() {
 		const input = this.$getTextView();
-		const table = this.$getDataTable();
 		const receivedValue = input.getValue();
-		if (receivedValue.trim()) {
-			table.add({Name: receivedValue});
+		if (receivedValue.trim() && this.tableData.config.url.includes("countries")) {
+			countries.add({Name: receivedValue});
+			input.setValue("");
+		}
+		else if (receivedValue.trim()) {
+			statuses.add({Value: receivedValue});
 			input.setValue("");
 		}
 	}
@@ -74,8 +78,9 @@ export default class DataTableView extends JetView {
 		const receivedId = table.getSelectedId();
 		if (receivedId && this.tableData.config.url.includes("countries")) {
 			countries.remove(receivedId);
-		} else if (receivedId){
-			statuses.remove(receivedId)
+		}
+		else if (receivedId) {
+			statuses.remove(receivedId);
 		}
 	}
 }

@@ -10,5 +10,5 @@ export default {
 	Settings: "Settings",
 	App: "App",
 	Countries: "Countries",
-	Statuses: "Statuses",
+	Statuses: "Statuses"
 };

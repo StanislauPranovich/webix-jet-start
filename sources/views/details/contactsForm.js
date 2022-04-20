@@ -63,7 +63,7 @@ export default class ContactsFormView extends JetView {
 	}
 
 	$getContactsForm() {
-		return this.$$("contactsForm")
+		return this.$$("contactsForm");
 	}
 
 	saveItem() {
@@ -73,6 +73,7 @@ export default class ContactsFormView extends JetView {
 			this.webix.message("Data saved!");
 		}
 	}
+
 	urlChange() {
 		const urlId = this.getParam("id");
 		this.getContacts().waitData.then(() => {
@@ -82,6 +83,6 @@ export default class ContactsFormView extends JetView {
 			else {
 				this.$getContactsForm().clear();
 			}
-		})
+		});
 	}
 }

@@ -1,4 +1,4 @@
-import { JetView } from "webix-jet";
+import {JetView} from "webix-jet";
 
 import contacts from "../../models/contacts";
 import countries from "../../models/countries";
@@ -23,8 +23,9 @@ export default class ContactsListView extends JetView {
 							contacts.remove(id);
 							if (this.$getListOfContacts().count() !== 0) {
 								this.$getListOfContacts().select(this.$getListOfContacts().getFirstId());
-							} else {
-								this.show("contacts")
+							}
+							else {
+								this.show("contacts");
 							}
 							return false;
 						}
@@ -56,11 +57,15 @@ export default class ContactsListView extends JetView {
 			StatusID: randomInteger(1, statusesList.count())
 		});
 		countries.add({
-			Name: countriesList.getItem(countriesList.getIdByIndex(randomInteger(0, countriesList.count() - 1))).name,
-		})
+			Name: countriesList.getItem(
+				countriesList.getIdByIndex(randomInteger(0, countriesList.count() - 1))
+			).name
+		});
 		statuses.add({
-			Value: statusesList.getItem(statusesList.getIdByIndex(randomInteger(0, statusesList.count() - 1))).Value,
-		})
+			Value: statusesList.getItem(
+				statusesList.getIdByIndex(randomInteger(0, statusesList.count() - 1))
+			).Value
+		});
 	}
 
 	init() {
@@ -77,8 +82,9 @@ export default class ContactsListView extends JetView {
 			else {
 				listOfContacts.select(listOfContacts.getFirstId());
 			}
-		})
+		});
 	}
+
 	urlChange() {
 		const contactId = this.getParam("id");
 		if (contactId === undefined) {
